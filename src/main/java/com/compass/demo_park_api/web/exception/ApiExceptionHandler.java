@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.compass.demo_park_api.exception.EntityNotFoundException;
+import com.compass.demo_park_api.exception.PasswordInvalidException;
 import com.compass.demo_park_api.exception.UsernameUniqueViolationException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice
 public class ApiExceptionHandler {
+
+    @ExceptionHandler(PasswordInvalidException.class)
+    public ResponseEntity<ErrorMessage> passwordInvalidException(RuntimeException ex, HttpServletRequest request) { 
+        log.error("api error", ex);
+        return ResponseEntity
+        .status(HttpStatus.BAD_REQUEST)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, ex.getMessage()));
+    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorMessage> entityNotFoundException(RuntimeException ex, HttpServletRequest request) { 
