@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.compass.demo_park_api.entity.Usuario;
 
-public interface UsuarioRepository extends JpaRepository <Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findByUsername(String username);
 
