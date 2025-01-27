@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.compass.demo_park_api.entity.Cliente;
 import com.compass.demo_park_api.exception.CpfUniqueViolationException;
+import com.compass.demo_park_api.exception.EntityNotFoundException;
 import com.compass.demo_park_api.repository.ClienteRepository;
 
 import jakarta.transaction.Transactional;
@@ -25,5 +26,12 @@ public class ClienteService {
                 String.format("CPF '%s' não pode ser cadastrado, já existe no siste", cliente.getCpf())
                 );
         }
+    }
+
+    @Transactional(readOnly = true)
+    public Cliente buscarPorId(Long id) {
+        return clienteRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Cliente id=%s não encontrado no sistema", id))
+        );
     }
 }

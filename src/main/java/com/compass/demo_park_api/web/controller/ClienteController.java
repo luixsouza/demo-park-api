@@ -6,12 +6,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.compass.demo_park_api.entity.Cliente;
+import com.compass.demo_park_api.entity.Usuario;
 import com.compass.demo_park_api.jwt.JwtUserDetails;
 import com.compass.demo_park_api.service.ClienteService;
 import com.compass.demo_park_api.service.UsuarioService;
 import com.compass.demo_park_api.web.dto.ClienteCreateDto;
 import com.compass.demo_park_api.web.dto.ClienteResponseDto;
+import com.compass.demo_park_api.web.dto.UsuarioResponseDto;
 import com.compass.demo_park_api.web.dto.mapper.ClienteMapper;
+import com.compass.demo_park_api.web.dto.mapper.UsuarioMapper;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
@@ -35,4 +38,10 @@ public class ClienteController {
         return ResponseEntity.status(201).body(ClienteMapper.toDto(cliente));
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ClienteResponseDto> getById(@PathVariable Long id) {
+        Cliente cliente = clienteService.buscarPorId(id);
+        return ResponseEntity.ok(ClienteMapper.toDto(cliente));
+    }
 }
