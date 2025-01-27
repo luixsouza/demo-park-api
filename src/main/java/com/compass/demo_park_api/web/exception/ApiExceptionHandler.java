@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.compass.demo_park_api.exception.CpfUniqueViolationException;
 import com.compass.demo_park_api.exception.EntityNotFoundException;
 import com.compass.demo_park_api.exception.PasswordInvalidException;
 import com.compass.demo_park_api.exception.UsernameUniqueViolationException;
@@ -47,7 +48,7 @@ public class ApiExceptionHandler {
         .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
     }
 
-    @ExceptionHandler(UsernameUniqueViolationException.class)
+    @ExceptionHandler({UsernameUniqueViolationException.class, CpfUniqueViolationException.class})
     public ResponseEntity<ErrorMessage> uniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("api error", ex);
         return ResponseEntity
