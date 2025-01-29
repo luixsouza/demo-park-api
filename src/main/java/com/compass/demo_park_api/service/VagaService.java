@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.compass.demo_park_api.entity.Vaga;
+import com.compass.demo_park_api.entity.Vaga.StatusVaga;
 import com.compass.demo_park_api.exception.CodigoUniqueViolationException;
 import com.compass.demo_park_api.repository.VagaRepository;
 
@@ -32,6 +33,13 @@ public class VagaService {
     public Vaga buscarPorCodigo(String codigo) {
         return vagaRepository.findByCodigo(codigo).orElseThrow(
             () -> new EntityNotFoundException(String.format("Vaga com código '%s' não foi encontrada", codigo))
+        );
+    }
+
+    @Transactional
+    public Vaga buscarPorVagaLivre() {
+        return vagaRepository.findFirstByStatus(StatusVaga.LIVRE).orElseThrow(
+            () -> new EntityNotFoundException("Nenhuma vaga livre foi encontrada")
         );
     }
 }

@@ -38,10 +38,10 @@ public class ClienteVaga {
     private String cor;
 
     @Column(name = "data_entrada", nullable = false)
-    private LocalDateTime dateEntrada;
+    private LocalDateTime dataEntrada;
 
     @Column(name = "data_saida")
-    private LocalDateTime dateSaida;
+    private LocalDateTime dataSaida;
 
     @Column(name = "valor", columnDefinition = "decimal(7,2)")
     private BigDecimal valor;
