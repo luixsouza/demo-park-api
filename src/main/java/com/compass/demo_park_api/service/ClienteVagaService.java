@@ -1,9 +1,12 @@
 package com.compass.demo_park_api.service;
 
+import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.compass.demo_park_api.entity.ClienteVaga;
 import com.compass.demo_park_api.repository.ClienteVagaRepository;
+import com.compass.demo_park_api.repository.projection.ClienteVagaProjection;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -32,5 +35,10 @@ public class ClienteVagaService {
     @Transactional
     public long getTotalDeVezesEstacionamentoCompleto(String cpf) {
         return repository.countByClienteCpfAndDataSaidaIsNotNull(cpf);
+    }
+
+    @Transactional
+    public Page<ClienteVagaProjection> buscarTodosPorClienteCpf(String cpf, Pageable pageable) {
+        return repository.findAllByClienteCpf(cpf, pageable);
     }
 }
