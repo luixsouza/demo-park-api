@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ClienteVagaMapper {
 
-    public static ClienteVaga toCLienteVaga(EstacionamentoCreateDto dto) {
+    public static ClienteVaga toClienteVaga(EstacionamentoCreateDto dto) {
         return new ModelMapper().map(dto, ClienteVaga.class);
     }
 
