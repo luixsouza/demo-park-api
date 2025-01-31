@@ -13,7 +13,7 @@ Este projeto é uma API REST desenvolvida para facilitar a gestão de um estacio
 - **Banco de Dados H2 (para testes) e MySQL**
 - **Swagger para documentação**
 - **JasperReports para geração de relatórios em PDF**
-- **Postman para testas os EndPoints**
+- **Postman para testar os EndPoints**
 
 ## Funcionalidades
 
@@ -72,11 +72,12 @@ Este projeto é uma API REST desenvolvida para facilitar a gestão de um estacio
    ```
 6. Acesse a documentação no Swagger:
    ```sh
-   http://localhost:8080/swagger-ui.html`
+   http://localhost:8080/swagger-ui.html
    ```
 
 ## Exemplo de Relatório Gerado
 ![Exemplo de Relatório](src/main/resources/images/parkFinalExample.png)
+**Atenção: Todos os dados sensiveis da imagem são ficticios ou foram gerados no site: https://www.4devs.com.br/**
 
 ## 📩 Contato
 
